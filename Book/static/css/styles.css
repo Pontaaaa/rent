@@ -1,0 +1,11 @@
+.navbar-brand {
+    font-weight: bold;
+}
+
+.container {
+    padding-top: 50px;
+}
+
+#about {
+    text-align: center;
+}
