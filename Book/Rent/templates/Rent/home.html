@@ -74,7 +74,7 @@
         <div class="container">
             <a class="navbar-brand" href="#">BookAHome</a>
             <div class="ml-auto">
-                <button class="btn btn-primary btn-signin">Sign In</button>
+                <button class="btn btn-primary btn-signin" data-toggle="modal" data-target="#signInModal">Sign In</button>
             </div>
         </div>
     </nav>
@@ -125,6 +125,33 @@
 
     </div>
 </div>
+
+<div class="modal fade" id="signInModal" tabindex="-1" role="dialog" aria-labelledby="signInModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="signInModalLabel">Sign In</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="inputEmail">Email address</label>
+                        <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="Enter email">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword">Password</label>
+                        <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Sign In</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <section id="about" class="container mt-5">
     <div class="row">
@@ -183,6 +210,14 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const signInButton = document.querySelector('.btn-signin');
+        signInButton.addEventListener('click', function() {
+            $('#signInModal').modal('show');
+        });
+    });
 </script>
 
 </body>
