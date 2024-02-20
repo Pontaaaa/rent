@@ -74,14 +74,19 @@
         <div class="container">
             <a class="navbar-brand" href="#">BookAHome</a>
             <div class="ml-auto">
-                <button class="btn btn-primary btn-signin" id="signin-btn" data-toggle="modal" data-target="#signInModal">Sign In</button>
-                <button class="btn btn-primary btn-signup" id="signup-btn" data-toggle="modal" data-target="#signUpModal">Sign Up</button>
+                {% if user.is_authenticated %}
+                    <span>Welcome, {{ user.username }}</span>
+                    <a href="{% url 'logout' %}" class="btn btn-outline-danger ml-2">Logout</a>
+                {% else %}
+                    <button class="btn btn-primary btn-signin" id="signin-btn" data-toggle="modal" data-target="#signInModal">Sign In</button>
+                    <button class="btn btn-primary btn-signup" id="signup-btn" data-toggle="modal" data-target="#signUpModal">Sign Up</button>
+                {% endif %}
             </div>
         </div>
     </nav>
 
 <div class="container-fluid p-0 main-section">
-    <h1 class="text-center home-text">Looking for a home away?</h1>
+    <h1 class="text-center home-text">Looking for a home abroad?</h1>
     <div class="row">
 
         <div class="container-fluid p-0">
