@@ -74,7 +74,8 @@
         <div class="container">
             <a class="navbar-brand" href="#">BookAHome</a>
             <div class="ml-auto">
-                <button class="btn btn-primary btn-signin" data-toggle="modal" data-target="#signInModal">Sign In</button>
+                <button class="btn btn-primary btn-signin" id="signin-btn" data-toggle="modal" data-target="#signInModal">Sign In</button>
+                <button class="btn btn-primary btn-signup" id="signup-btn" data-toggle="modal" data-target="#signUpModal">Sign Up</button>
             </div>
         </div>
     </nav>
@@ -146,6 +147,41 @@
                         <input type="password" class="form-control" id="inputPassword" placeholder="Password">
                     </div>
                     <button type="submit" class="btn btn-primary">Sign In</button>
+                    <p class="mt-3">Don't have an account? <a id="signUpLinkInSignInModal" href="#">Sign Up</a></p>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="signUpModal" tabindex="-1" role="dialog" aria-labelledby="signUpModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="signUpModalLabel">Sign Up</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="signUpForm" method="post" action="{% url 'signup' %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control" id="username" name="username" placeholder="Enter username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email address</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password1">Password</label>
+                        <input type="password" class="form-control" id="password1" name="password1" placeholder="Password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password2">Confirm Password</label>
+                        <input type="password" class="form-control" id="password2" name="password2" placeholder="Confirm password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Sign Up</button>
                 </form>
             </div>
         </div>
@@ -192,6 +228,17 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    const signInButton = document.getElementById('signin-btn');
+    const signUpButton = document.getElementById('signup-btn');
+
+    signInButton.addEventListener('click', function() {
+        $('#signInModal').modal('show');
+    });
+
+    signUpButton.addEventListener('click', function() {
+        $('#signUpModal').modal('show');
+    });
+
     const likeButtons = document.querySelectorAll('.like-button');
 
     likeButtons.forEach(button => {
@@ -209,15 +256,25 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+
+    $('#signInModal').on('hidden.bs.modal', function () {
+        $('#signUpModal').modal('show');
+    });
+
+    const signUpLinkInSignInModal = document.querySelector('#signUpLinkInSignInModal');
+    signUpLinkInSignInModal.addEventListener('click', function() {
+        $('#signInModal').modal('hide');
+        $('#signUpModal').modal('show');
+    });
 });
 </script>
+
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const signInButton = document.querySelector('.btn-signin');
-        signInButton.addEventListener('click', function() {
-            $('#signInModal').modal('show');
-        });
-    });
+    function submitSignUpForm() {
+        var form = document.getElementById('signUpForm');
+        
+        form.submit();
+    }
 </script>
 
 </body>
